@@ -36,8 +36,12 @@ function renderTable() {
         <td>${user.email}</td>
         <td>${user.role}</td>
         <td>
-          <button class="edit" onclick="handleEdit('${user.id}')">Edit</button>
-          <button class="delete" onclick="handleDelete('${user.id}')">Delete</button>
+          <button class="edit" onclick="handleEdit('${user.id}')">
+            <img class="icon blue" src="edit.svg" alt="edit button">
+          </button>
+          <button class="delete" onclick="handleDelete('${user.id}')">
+            <img class="icon red" src="trash-2.svg" alt="delete all icon">
+          </button>
         </td>
     `;
 
@@ -96,13 +100,76 @@ function handleRowSelect(id) {
   renderTable();
 }
 
+function handleSelectAll() {
+  const selectAllCheckbox = document.getElementById('selectAll');
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+  const pageUserIds = filteredUsers.slice(start, end).map(user => user.id);
+
+  if (selectAllCheckbox.checked) {
+    selectedRows = [...new Set([...selectedRows, ...pageUserIds])];
+  } else {
+    selectedRows = selectedRows.filter(id => !pageUserIds.includes(id));
+  }
+  renderTable();
+}
+
 function handleEdit(id) {
+  const row = document.querySelector(`tr:has(input[onchange="handleRowSelect('${id}')"])`);
+  const cells = row.querySelectorAll('td');
+  cells[1].innerhtml = `<input type="text" value="${users.find(u => u.id === id).name}">`;
+  cells[2].innerhtml = `<input type="text" value="${users.find(u => u.id === id).email}">`;
+  cells[3].innerhtml = `<input type="text" value="${users.find(u => u.id === id).role}">`;
+  cells[4].innerhtml = `<button class="save" onclick="handleSave('${id}')">Save</button>`;
 };
+
+function handleSave(id) {
+  const row = document.querySelector(`tr:has(input[onchange="handleRowSelect('${id}')"])`);
+  const cells = row.querySelectorAll('td');
+  const newName = cells[1].querySelector('input').value;
+  const newEmail = cells[2].querySelector('input').value;
+  const newRole = cells[3].querySelector('input').value;
+
+  const userIndex = users.findIndex(u => u.id === id);
+  users[userIndex] = { ...users[userIndex], name: newName, email: newEmail, role: newRole };
+  filteredUsers = users;
+  renderTable();
+}
 
 function handleDelete(id) {
+  users = users.filter(user => user.id !== id);
+  filteredUsers = filteredUsers.filter(user => user.id !== id);
+  selectedRows = selectedRows.filter(rowId => rowId !== id);
+  renderTable();
+  renderPaginationButtons();
+  deletedPageToLastPage();
 };
 
+
+
+function deleteSelected() {
+  users = users.filter(user => !selectedRows.includes(user.id));
+  filteredUsers = filteredUsers.filter(user => !selectedRows.includes(user.id));
+  selectedRows = [];
+  renderTable();
+  renderPaginationButtons();
+  deletedPageToLastPage();
+}
+
+function deletedPageToLastPage() {
+  const totalPages = Math.ceil(filteredUsers.length / PAGE_SIZE);
+  if (currentPage > totalPages) {
+    changePage(totalPages);
+  }
+}
+
 //To Make functions available globally for inline html ex: onclick
+window.handleEdit = handleEdit;
+window.handleSave = handleSave;
+window.handleDelete = handleDelete;
+window.handleRowSelect = handleRowSelect;
+window.handleSelectAll = handleSelectAll;
+window.deleteSelected = deleteSelected;
 window.changePage = changePage;
 
 fetchUsers();

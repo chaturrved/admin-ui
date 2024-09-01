@@ -3,12 +3,14 @@
   box-sizing: border-box;
 }
 
-body, #app {
+body,
+#app {
   margin: 0;
   padding: 0;
 }
 
-header, footer {
+header,
+footer {
   height: 4rem;
   font-weight: bold;
   padding: 10px;
@@ -25,8 +27,7 @@ header {
 header button {
   cursor: pointer;
   padding: 5px;
-  background-color: red;
-  color: white;
+  background-color: transparent;
   border: none;
 }
 
@@ -43,6 +44,19 @@ footer {
   padding: 10px;
 }
 
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.icon.red {
+  filter: invert(19%) sepia(94%) saturate(7477%) hue-rotate(-14deg);
+}
+
+.icon.blue {
+  filter: invert(25%) sepia(100%) saturate(4000%) hue-rotate(-170deg);
+}
+
 .search-container {
   display: flex;
   justify-content: space-between;
@@ -57,10 +71,9 @@ footer {
 
 .search-icon {
   padding: 8px 15px;
-  background-color: #4CAF50;
-  color: white;
   border: none;
   cursor: pointer;
+  background-color: transparent;
 }
 
 table {
@@ -90,43 +103,27 @@ th {
   padding: 5px 10px;
   margin-right: 5px;
   cursor: pointer;
-}
-
-.edit {
-  background-color: #008CBA;
-  color: white;
-}
-
-.delete {
-  background-color: #f44336;
-  color: white;
   border: none;
-
-}
-
-.save {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
+  background-color: transparent;
 }
 
 .pagination {
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
 .pagination button {
-  padding: 8px 16px;
+  padding: 4px;
   margin-right: 5px;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 
 .delete-selected {
-  padding: 8px 16px;
-  background-color: #f44336;
-  color: white;
   border: none;
   cursor: pointer;
+  background-color: transparent;
 }
