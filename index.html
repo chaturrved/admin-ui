@@ -22,20 +22,40 @@
       </div>
     </header>
     <div class="container">
-      <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search...">
-        <button class="search-icon" onclick="handleSearch()">
-          <img class="icon blue" src="search.svg" alt="Search icon">
+
+      <div class="actionRow">
+        <div class="search-container">
+          <div id="searchGroup">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button class="search-icon" onclick="handleSearch()">
+              <img class="icon blue" src="search.svg" alt="Search icon">
+            </button>
+          </div>
+        </div>
+
+        <button class="delete-selected" onclick="deleteSelected()">
+          <img class="icon white" src="trash-2.svg" alt="delete all icon">
+          <span>Delete Selected</span>
         </button>
       </div>
+
+      <div class="control-container">
+        <div class="fuzz-container">
+          <input type="checkbox" id="fuzzyCheck" onclick="toggleFuzz()">
+          <span class="label"> Fuzz</span>
+        </div>
+
+        <div class="clear">
+          <a onclick="clearAllFilters()">clear</a>
+        </div>
+      </div>
+
+
       <table id="userTable">
         <thead>
           <tr>
             <th>
               <input type="checkbox" id="selectAll" onclick="handleSelectAll()">
-              <button class="delete-selected" onclick="deleteSelected()">
-                <img class="icon red" src="trash-2.svg" alt="delete all icon">
-              </button>
             </th>
             <th>Name</th>
             <th>Email</th>
@@ -66,7 +86,7 @@
       </div>
     </div>
     <footer class="footer">
-      <span>Geektrust coding challenge.</span>
+      <a href="https://www.geektrust.com/challenge/admin-ui" target="_blank">Geektrust coding challenge.</a>
     </footer>
   </div>
   <script type="module" src="/main.js"></script>

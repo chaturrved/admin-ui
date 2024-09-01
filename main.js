@@ -4,6 +4,7 @@ let users = [];
 let filteredUsers = [];
 let currentPage = 1;
 let selectedRows = [];
+let search = '';
 
 async function fetchUsers() {
   try {
@@ -151,6 +152,7 @@ function deleteSelected() {
   users = users.filter(user => !selectedRows.includes(user.id));
   filteredUsers = filteredUsers.filter(user => !selectedRows.includes(user.id));
   selectedRows = [];
+
   renderTable();
   renderPaginationButtons();
   deletedPageToLastPage();
@@ -161,6 +163,71 @@ function deletedPageToLastPage() {
   if (currentPage > totalPages) {
     changePage(totalPages);
   }
+
+  //uncheck selectAll Checkbox
+  const checkbox = document.getElementById('selectAll');
+  checkbox.checked = false;
+}
+
+function toggleFuzz() {
+  const fuzzySearchCheckbox = document.getElementById('fuzzyCheck');
+
+  if (fuzzySearchCheckbox.checked) {
+    search = 'fuzzy';
+  } else {
+    search = 'normal';
+  }
+}
+
+function handleSearch() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+  filteredUsers = users.filter(user =>
+    Object.values(user).some(value => value.toLowerCase().includes(searchTerm))
+  );
+
+  if (search === 'fuzzy') {
+    filteredUsers = users.filter(user =>
+      Object.values(user).some(value => fuzzyMatch(value.toLowerCase(), searchTerm))
+    );
+  }
+
+  currentPage = 1;
+  renderTable();
+  renderPaginationButtons();
+}
+
+function fuzzyMatch(value, searchTerm) {
+  const searchLength = searchTerm.length;
+  let matchCount = 0;
+  let lastIndex = 0;
+
+  for (let i = 0; i < searchLength; i++) {
+    const char = searchTerm[i];
+    const index = value.indexOf(char, lastIndex);
+
+    if (index === -1) {
+      return false;
+    }
+
+    matchCount++;
+    lastIndex = index + 1;
+  }
+
+  return matchCount / searchLength >= 1;
+}
+
+function clearAllFilters() {
+  const fuzzySearchCheckbox = document.getElementById('fuzzyCheck');
+  const checkbox = document.getElementById('selectAll');
+  const searchTerm = document.getElementById('searchInput');
+
+  fuzzySearchCheckbox.checked = false;
+  checkbox.checked = false;
+  searchTerm.value = '';
+  filteredUsers = [...users];
+  renderTable();
+  renderPaginationButtons();
 }
 
 //To Make functions available globally for inline html ex: onclick
@@ -171,5 +238,8 @@ window.handleRowSelect = handleRowSelect;
 window.handleSelectAll = handleSelectAll;
 window.deleteSelected = deleteSelected;
 window.changePage = changePage;
+window.handleSearch = handleSearch;
+window.toggleFuzz = toggleFuzz;
+window.clearAllFilters = clearAllFilters;
 
 fetchUsers();

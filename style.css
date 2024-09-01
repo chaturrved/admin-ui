@@ -17,6 +17,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: red;
 }
 
 header {
@@ -39,7 +40,7 @@ footer {
   height: calc(100vh - 8rem);
   max-width: 1200px;
   width: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   margin: 0 auto;
   padding: 10px;
 }
@@ -47,6 +48,10 @@ footer {
 .icon {
   width: 20px;
   height: 20px;
+}
+
+.icon.white {
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(180deg);
 }
 
 .icon.red {
@@ -57,16 +62,35 @@ footer {
   filter: invert(25%) sepia(100%) saturate(4000%) hue-rotate(-170deg);
 }
 
+.actionRow {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .search-container {
   display: flex;
   justify-content: space-between;
+  width: 60%;
   margin-bottom: 20px;
   margin-right: 10px;
 }
 
+#searchGroup {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  border: none;
+  border-bottom: 1px solid skyblue;
+}
+
 #searchInput {
   padding: 8px;
-  width: 55%;
+  width: 90%;
+  border: none;
+  outline: none;
 }
 
 .search-icon {
@@ -74,6 +98,46 @@ footer {
   border: none;
   cursor: pointer;
   background-color: transparent;
+}
+
+.control-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fuzz-container {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.clear {
+  gap: 2px;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.delete-selected {
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background-color: red;
+  border-radius: 20px;
+  color: white;
+}
+
+.delete-selected span {
+  margin-top: 3px;
+  padding: 1px;
 }
 
 table {
@@ -86,6 +150,7 @@ td {
   border: 1px solid #ddd;
   padding: 12px;
   text-align: left;
+  overflow: hidden;
 }
 
 th {
@@ -107,8 +172,13 @@ th {
   background-color: transparent;
 }
 
+.save {
+  background-color: green;
+  color: white;
+}
+
 .pagination {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,11 +189,5 @@ th {
   margin-right: 5px;
   cursor: pointer;
   border: none;
-  background-color: transparent;
-}
-
-.delete-selected {
-  border: none;
-  cursor: pointer;
   background-color: transparent;
 }
