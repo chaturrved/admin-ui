@@ -117,10 +117,10 @@ function handleSelectAll() {
 function handleEdit(id) {
   const row = document.querySelector(`tr:has(input[onchange="handleRowSelect('${id}')"])`);
   const cells = row.querySelectorAll('td');
-  cells[1].innerhtml = `<input type="text" value="${users.find(u => u.id === id).name}">`;
-  cells[2].innerhtml = `<input type="text" value="${users.find(u => u.id === id).email}">`;
-  cells[3].innerhtml = `<input type="text" value="${users.find(u => u.id === id).role}">`;
-  cells[4].innerhtml = `<button class="save" onclick="handleSave('${id}')">Save</button>`;
+  cells[1].innerHTML = `<input type="text" value="${users.find(u => u.id === id).name}">`;
+  cells[2].innerHTML = `<input type="text" value="${users.find(u => u.id === id).email}">`;
+  cells[3].innerHTML = `<input type="text" value="${users.find(u => u.id === id).role}">`;
+  cells[4].innerHTML = `<button class="save" onclick="handleSave('${id}')">Save</button>`;
 };
 
 function handleSave(id) {
