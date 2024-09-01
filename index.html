@@ -46,11 +46,11 @@
       <div class="pagination">
         <button class="delete-selected" onclick="">Delete Selected</button>
         <div>
-          <button class="first-page" onclick="">First</button>
-          <button class="previous-page" onclick="">Previous</button>
+          <button class="first-page" onclick="changePage('first')">First</button>
+          <button class="previous-page" onclick="changePage('previous')">Previous</button>
           <span id="pageNumbers"></span>
-          <button class="next-page" onclick="">Next</button>
-          <button class="last-page" onclick="">Last</button>
+          <button class="next-page" onclick="changePage('next')">Next</button>
+          <button class="last-page" onclick="changePage('last')">Last</button>
         </div>
       </div>
     </div>
