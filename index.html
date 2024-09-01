@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,7 +9,55 @@
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <header class="header">
+      <span>Dashboard</span>
+      <div>
+        <button class="user-profile" onclick="">User</button>
+        <button class="user-menu" onclick="">Menu</button>
+      </div>
+    </header>
+    <div class="container">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button class="search-icon" onclick="">Search</button>
+      </div>
+      <table id="userTable">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="selectAll" onclick=""></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <td><input type="checkbox" onchange=""></td>
+          <td>userName</td>
+          <td>userEmail</td>
+          <td>userRole</td>
+          <td>
+            <button class="edit" onclick="">Edit</button>
+            <button class="delete" onclick="">Delete</button>
+          </td>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button class="delete-selected" onclick="">Delete Selected</button>
+        <div>
+          <button class="first-page" onclick="">First</button>
+          <button class="previous-page" onclick="">Previous</button>
+          <span id="pageNumbers"></span>
+          <button class="next-page" onclick="">Next</button>
+          <button class="last-page" onclick="">Last</button>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <span>Geektrust coding challenge.</span>
+    </footer>
+  </div>
   <script type="module" src="/main.js"></script>
 </body>
 
